@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen">
+  <div class="w-full pb-36">
     <div class="flex w-full flex-col items-center gap-5">
       <div class="w-full h-[200px]">
         <img
@@ -16,27 +16,8 @@
         read more</a
       >
     </div>
-    <div class="mt-[160px]">
-      <div class="flex flex-col items-center">
-        <p class="text-2xl text-gray-500">
-          Subscribe to get weekly newspaper and daily updates
-        </p>
-        <div class="pt-12 flex gap-5">
-          <input
-            type="text"
-            placeholder="Email ..."
-            class="border-2 border-green-700 px-2 rounded-md focus:outline-none focus:border-green-500 text-gray-500"
-          />
-          <a
-            :href="`/articles`"
-            class="bg-green-700 px-6 text-white py-1 rounded-lg hover:drop-shadow-xl hover:bg-green-600"
-          >
-            Subscribe</a
-          >
-        </div>
-      </div>
-    </div>
   </div>
+  <InputForm />
 </template>
 
 <script setup>
@@ -53,7 +34,10 @@ useHead({
       rel: 'canonical',
       href: 'https://kisi-nuxt-app.herokuapp.com/',
     },
-    { rel: 'icon', href: 'https://res.cloudinary.com/dmgfxu4fg/image/upload/v1658757660/articleLogo_prev_ui_c8vfox.png' },
+    {
+      rel: 'icon',
+      href: 'https://res.cloudinary.com/dmgfxu4fg/image/upload/v1658757660/articleLogo_prev_ui_c8vfox.png',
+    },
   ],
 
   meta: [
