@@ -25,7 +25,10 @@ article &&
         rel: 'canonical',
         href: 'https://kisi-nuxt-app.herokuapp.com/',
       },
-      { rel: 'icon', href: '/assets/images/articleLogo.png' },
+      {
+        rel: 'icon',
+        href: 'https://res.cloudinary.com/dmgfxu4fg/image/upload/v1658757660/articleLogo_prev_ui_c8vfox.png',
+      },
     ],
 
     meta: [
@@ -44,8 +47,14 @@ article &&
 </script>
 
 <template>
-  <div v-if="article">
-    <div v-for="(articl, i) in article" :key="i" class="min-h-screen">
+  <div v-if="data">
+    <div
+      v-for="(articl, i) in data.data.filter(
+        (article) => article.title === articleName
+      )"
+      :key="i"
+      class="min-h-screen"
+    >
       <div class="flex justify-center py-3">
         <div class="max-w-[1240px] md:px-0 px-5 pb-10">
           <div class="h-[450px] md:w-[900px] flex justify-center sm:w-fit">
