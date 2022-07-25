@@ -95,4 +95,7 @@ article &&
   <div v-else class="flex justify-center">
     <h1>Loading ...</h1>
   </div>
+  <div v-if="data">
+    <InputForm />
+  </div>
 </template>
