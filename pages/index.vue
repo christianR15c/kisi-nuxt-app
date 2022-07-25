@@ -53,7 +53,7 @@ useHead({
       rel: 'canonical',
       href: 'https://kisi-nuxt-app.herokuapp.com/',
     },
-    { rel: 'icon', href: '/assets/images/articleLogo.png' },
+    { rel: 'icon', href: 'https://res.cloudinary.com/dmgfxu4fg/image/upload/v1658757660/articleLogo_prev_ui_c8vfox.png' },
   ],
 
   meta: [
