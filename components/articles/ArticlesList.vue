@@ -36,15 +36,46 @@
         </p>
       </div>
     </div>
+    <div class="flex justify-center gap-3 pt-4">
+      <p>sort by:</p>
+      <div class="flex gap-2">
+        <p
+          class="px-2 border-2 rounded-xl text-gray-400 cursor-pointer"
+          :class="sorted === 'Asc' && 'filtered-category'"
+          @click="sorted = 'Asc'"
+        >
+          Asc
+        </p>
+        <p
+          class="px-2 border-2 rounded-xl text-gray-400 cursor-pointer"
+          :class="sorted === 'Desc' && 'filtered-category'"
+          @click="sorted = 'Desc'"
+        >
+          Desc
+        </p>
+        <p
+          class="px-2 border-2 rounded-xl text-gray-400 cursor-pointer"
+          :class="sorted === 'Newest' && 'filtered-category'"
+          @click="sorted = 'Newest'"
+        >
+          Newest
+        </p>
+        <p
+          class="px-2 border-2 rounded-xl text-gray-400 cursor-pointer"
+          :class="sorted === 'Oldest' && 'filtered-category'"
+          @click="sorted = 'Oldest'"
+        >
+          Oldest
+        </p>
+      </div>
+    </div>
     <div class="flex w-full justify-center">
       <div
         v-if="input"
         class="w-full flex flex-wrap justify-center gap-3 h-full m-4 pb-8 max-w-[1240px]"
       >
         <ArticlesArticlecard
-          v-for="(article, i) in data.data.filter((articles) =>
-            articles.title.includes(input)
-          )"
+          v-for="(article, i) in filteredArticles"
           :key="i"
           :title="article.title"
           :description="article.description"
@@ -86,7 +117,39 @@
         "
       >
         <ArticlesArticlecard
-          v-for="(article, i) in data.data"
+          v-for="(article, i) in sorted === 'Asc'
+            ? data.data.sort((a, b) => {
+                if (a.title < b.title) {
+                  return -1;
+                }
+                if (a.title > b.title) {
+                  return 1;
+                }
+                return 0;
+              })
+            : sorted === 'Desc'
+            ? data.data.sort((a, b) => {
+                if (a.title < b.title) {
+                  return 1;
+                }
+                if (a.title > b.title) {
+                  return -1;
+                }
+                return 0;
+              })
+            : sorted === 'Newest'
+            ? data.data.sort(
+                (a, b) =>
+                  new Date(a.published_at).getTime() -
+                  new Date(b.published_at).getTime()
+              )
+            : sorted === 'Oldest'
+            ? data.data.sort(
+                (a, b) =>
+                  new Date(b.published_at).getTime() -
+                  new Date(a.published_at).getTime()
+              )
+            : data.data"
           :key="i"
           :title="article.title"
           :description="article.description"
@@ -133,14 +196,23 @@
 <script setup>
 import { fetchData } from '~~/helpers/utils';
 
-const input = ref('');
 const data = fetchData();
+// tried to use functions but couldn't work
+// console.log('data:', data._rawValue.data);
 
+// const filteredArticles = data._rawValue.data.filter((articles) =>
+//   articles.title.includes(input)
+// );
+
+const input = ref('');
 const selected = ref('');
+const sorted = ref('');
 
 const onSelect = (name) => {
   selected.value = name;
-  console.log(selected.value);
+};
+const onSort = (sortChoose) => {
+  sorted.value = sortChoose;
 };
 
 useHead({
