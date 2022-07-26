@@ -27,7 +27,12 @@
         <p>
           Author: <span>{{ author }}</span>
         </p>
-        <p>{{ date.split('T')[0] }}</p>
+        <div class="flex gap-4">
+          <p class="text-sm text-gray-600">{{ date.split('T')[0] }}</p>
+          <p class="text-sm text-gray-600">
+            {{ date.split('T')[1].split('+')[0] }}
+          </p>
+        </div>
       </div>
       <p class="text-gray-600">
         {{ description.split('').splice(0, 80).join('') }}
@@ -48,10 +53,5 @@
 <script>
 export default {
   props: ['description', 'author', 'date', 'title', 'image', 'category'],
-  data() {
-    return {
-      showModal: false,
-    };
-  },
 };
 </script>
